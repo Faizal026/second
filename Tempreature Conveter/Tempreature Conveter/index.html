@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <div class="converter">
+            <input 
+                type="number"
+                id="inputTemperature"
+                placeholder="Enter Temperature" 
+            />
+            <select id="unitSelect">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+            </select>
+            <button onclick="convertTemperature()">Convert</button> 
+        </div>
+        <div class="result">
+            <p id="resultTemperature"></p>
+        </div>
+    </div>
+    <script>
+        function convertTemperature() {
+            const inputTemperature = parseFloat(document.getElementById("inputTemperature").value);
+            const unitSelect = document.getElementById("unitSelect").value;
+            const resultTemperatureElement = document.getElementById("resultTemperature");
+
+            if (unitSelect === "celsius") {
+                const fahrenheit = (inputTemperature * 9) / 5 + 32;
+                resultTemperatureElement.textContent = `${fahrenheit.toFixed(2)}°F`;
+                document.body.style.backgroundColor = getBackgroundColor(fahrenheit);
+            } else if (unitSelect === "fahrenheit") {
+                const celsius = ((inputTemperature - 32) * 5) / 9;
+                resultTemperatureElement.textContent = `${celsius.toFixed(2)}°C`;
+                document.body.style.backgroundColor = getBackgroundColor(celsius);
+            }
+        }
+
+        function getBackgroundColor(temperature) {
+            if (temperature <= 0) {
+                return "#873e23";
+            } else if (temperature <= 20) {
+                return "#eeeee4";
+            } else if (temperature <= 30) {
+                return "#1874a5";
+            } else {
+                return "#44bcd8";
+            }
+        }
+    </script>
+</body>
+</html>
